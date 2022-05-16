@@ -1,11 +1,8 @@
-﻿using Eventos.API.Data;
-using Eventos.API.Models;
+﻿using Eventos.Domain;
+using Eventos.Persistence;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Eventos.API.Controllers
 {
@@ -13,13 +10,13 @@ namespace Eventos.API.Controllers
     [Route("api/[controller]")]
     public class EventosController : ControllerBase
     {
-        private readonly DataContext _context;
-        public EventosController(DataContext context)
+        private readonly EventosContext _context;
+        public EventosController(EventosContext context)
         {
             _context = context;
         }
 
-        public DataContext Context { get; }
+        public EventosContext Context { get; }
 
         [HttpGet]
         public IEnumerable<Evento> Get()
@@ -30,7 +27,7 @@ namespace Eventos.API.Controllers
         [HttpGet("{id}")]
         public IEnumerable<Evento> GetById(int id)
         {
-            return _context.Eventos.Where(_eventos => _eventos.EventoId == id);
+            return _context.Eventos.Where(_eventos => _eventos.Id == id);
         }
 
         [HttpPost]

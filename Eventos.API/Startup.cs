@@ -1,4 +1,4 @@
-using Eventos.API.Data;
+using Eventos.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +23,7 @@ namespace Eventos.API
         {
             services.AddCors();
             services.AddControllers();
-            services.AddDbContext<DataContext>(
+            services.AddDbContext<EventosContext>(
                 context => context.UseSqlite(Configuration.GetConnectionString("Default"))
                 );
             services.AddSwaggerGen(c =>
