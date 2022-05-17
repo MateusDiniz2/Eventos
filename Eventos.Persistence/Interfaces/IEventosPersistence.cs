@@ -19,12 +19,6 @@ namespace Eventos.Persistence.Interfaces
         Task<Evento[]> GettAllEventosAsync (bool includePalestrantes);
         Task<Evento> GettAllEventosByIdAsync(int EventoId, bool includePalestrantes);
 
-        #endregion
-
-        #region PALESTRANTES
-        Task<Palestrante[]> GettAllPalestrantesByNomeAsync(string nome, bool includeEventos);
-        Task<Palestrante[]> GettAllPalestrantesAsync(int palestranteId, bool includeEventos);
-        Task<Palestrante> GettAllPalestranteByIdAsync(int palestranteId, bool includeEventos);
-        #endregion
+        #endregion      
     }
 }
