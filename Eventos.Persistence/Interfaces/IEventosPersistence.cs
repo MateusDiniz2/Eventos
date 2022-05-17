@@ -1,8 +1,4 @@
 ﻿using Eventos.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Eventos.Persistence.Interfaces
@@ -26,9 +22,9 @@ namespace Eventos.Persistence.Interfaces
         #endregion
 
         #region PALESTRANTES
-        Task<Palestrante[]> GettAllPalestrantesByIdAsync(int id, bool includeEventos);
-        Task<Palestrante[]> GettAllPalestrantesAsync(int id, bool includeEventos);
-        Task<Palestrante> GettAllPalestranteByIdAsync(int id, bool includeEventos);
+        Task<Palestrante[]> GettAllPalestrantesByNomeAsync(string nome, bool includeEventos);
+        Task<Palestrante[]> GettAllPalestrantesAsync(int palestranteId, bool includeEventos);
+        Task<Palestrante> GettAllPalestranteByIdAsync(int palestranteId, bool includeEventos);
         #endregion
     }
 }
