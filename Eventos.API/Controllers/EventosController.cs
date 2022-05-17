@@ -1,5 +1,5 @@
 ﻿using Eventos.Domain;
-using Eventos.Persistence;
+using Eventos.Persistence.Context;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;

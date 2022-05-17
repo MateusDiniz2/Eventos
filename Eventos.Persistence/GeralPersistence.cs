@@ -1,8 +1,5 @@
-﻿using Eventos.Persistence.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Eventos.Persistence.Context;
+using Eventos.Persistence.Interfaces;
 using System.Threading.Tasks;
 
 namespace Eventos.Persistence

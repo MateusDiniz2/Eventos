@@ -1,4 +1,5 @@
 ﻿using Eventos.Domain;
+using Eventos.Persistence.Context;
 using Eventos.Persistence.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
