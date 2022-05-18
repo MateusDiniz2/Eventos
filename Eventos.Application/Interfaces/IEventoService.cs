@@ -9,8 +9,8 @@ namespace Eventos.Application.Interfaces
         Task<Evento> UpdateEvento(int eventoId, Evento model);
         Task<bool> DeleteEvento(int eventoId);
 
-        Task<Evento[]> GettAllEventosByTemaAsync(string tema, bool includePalestrantes = false);
-        Task<Evento[]> GettAllEventosAsync(bool includePalestrantes = false);
-        Task<Evento> GettAllEventosByIdAsync(int EventoId, bool includePalestrantes = false);
+        Task<Evento[]> GetAllEventosByTemaAsync(string tema, bool includePalestrantes = false);
+        Task<Evento[]> GetAllEventosAsync(bool includePalestrantes = false);
+        Task<Evento> GetEventoByIdAsync(int eventoId, bool includePalestrantes = false);
     }
 }

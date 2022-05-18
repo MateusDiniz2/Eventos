@@ -14,7 +14,7 @@ namespace Eventos.Persistence
         {
              _context = context;   
         }
-        public async Task<Evento[]> GettAllEventosAsync(bool includePalestrantes = false)
+        public async Task<Evento[]> GetAllEventosAsync(bool includePalestrantes = false)
         {
             IQueryable<Evento> query = _context.Eventos.Include(e => e.Lotes)
                                                        .Include(e => e.RedesSociais);
@@ -28,7 +28,7 @@ namespace Eventos.Persistence
             return await query.ToArrayAsync();
         }
 
-        public async Task<Evento[]> GettAllEventosByTemaAsync(string tema, bool includePalestrantes = false)
+        public async Task<Evento[]> GetAllEventosByTemaAsync(string tema, bool includePalestrantes = false)
         {
             IQueryable<Evento> query = _context.Eventos.Include(e => e.Lotes)
                                                        .Include(e => e.RedesSociais);
@@ -42,7 +42,7 @@ namespace Eventos.Persistence
             return await query.ToArrayAsync();
         }
     
-        public async Task<Evento> GettAllByIdAsync(int EventoId, bool includePalestrantes = false)
+        public async Task<Evento> GetEventoByIdAsync(int EventoId, bool includePalestrantes = false)
         {
             IQueryable<Evento> query = _context.Eventos
                                                .Include(e => e.Lotes)

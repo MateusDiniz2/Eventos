@@ -6,9 +6,9 @@ namespace Eventos.Persistence.Interfaces
     public interface IEventosPersistence
     {
         #region EVENTOS
-        Task<Evento[]> GettAllEventosByTemaAsync(string tema, bool includePalestrantes = false);
-        Task<Evento[]> GettAllEventosAsync (bool includePalestrantes = false);
-        Task<Evento> GettAllByIdAsync(int EventoId, bool includePalestrantes = false);
+        Task<Evento[]> GetAllEventosByTemaAsync(string tema, bool includePalestrantes = false);
+        Task<Evento[]> GetAllEventosAsync (bool includePalestrantes = false);
+        Task<Evento> GetEventoByIdAsync(int EventoId, bool includePalestrantes = false);
 
         #endregion      
     }
