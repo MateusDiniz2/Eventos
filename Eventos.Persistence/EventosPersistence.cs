@@ -12,7 +12,7 @@ namespace Eventos.Persistence
         private readonly EventosContext _context;
         public EventosPersistence(EventosContext context)
         {
-             _context = context;   
+             _context = context;
         }
         public async Task<Evento[]> GetAllEventosAsync(bool includePalestrantes = false)
         {
@@ -24,7 +24,7 @@ namespace Eventos.Persistence
                              .ThenInclude(pe => pe.Palestrante);
             }
 
-            query = query.OrderBy(e => e.Id);
+            query = query.AsNoTracking().OrderBy(e => e.Id);
             return await query.ToArrayAsync();
         }
 
@@ -38,7 +38,7 @@ namespace Eventos.Persistence
                              .ThenInclude(pe => pe.Palestrante);
             }
 
-            query = query.OrderBy(e => e.Id).Where(e => e.Tema.ToLower().Contains(tema.ToLower()));
+            query = query.AsNoTracking().OrderBy(e => e.Id).Where(e => e.Tema.ToLower().Contains(tema.ToLower()));
             return await query.ToArrayAsync();
         }
     
@@ -53,7 +53,7 @@ namespace Eventos.Persistence
                              .ThenInclude(pe => pe.Palestrante);
             }
 
-            query = query.OrderBy(e => e.Id)
+            query = query.AsNoTracking().OrderBy(e => e.Id)
                          .Where(e => e.Id == EventoId);
             
             return await query.FirstOrDefaultAsync();

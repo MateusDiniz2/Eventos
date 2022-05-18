@@ -1,4 +1,8 @@
+using Eventos.Application;
+using Eventos.Application.Interfaces;
+using Eventos.Persistence;
 using Eventos.Persistence.Context;
+using Eventos.Persistence.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +34,12 @@ namespace Eventos.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Eventos.API", Version = "v1" });
             });
+
+            services.AddScoped<IEventosPersistence, EventosPersistence>();
+            services.AddScoped<IPalestrantesPersistence, PalestrantesPersistence>();
+            services.AddScoped<IGeralPersistence, GeralPersistence>();
+            services.AddScoped<IEventoService, EventoService>();
+            services.AddScoped<IPalestranteService, PalestranteService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
