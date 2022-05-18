@@ -1,8 +1,11 @@
-﻿using Eventos.Domain;
+﻿using Eventos.Application.Interfaces;
+using Eventos.Domain;
 using Eventos.Persistence.Context;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Eventos.API.Controllers
 {
@@ -10,36 +13,108 @@ namespace Eventos.API.Controllers
     [Route("api/[controller]")]
     public class EventosController : ControllerBase
     {
-        private readonly EventosContext _context;
-        public EventosController(EventosContext context)
+        private readonly IEventoService _eventoService;
+        public EventosController(IEventoService eventoService)
         {
-            _context = context;
+            _eventoService = eventoService;
         }
 
         public EventosContext Context { get; }
 
         [HttpGet]
-        public IEnumerable<Evento> Get()
+        public async Task<IActionResult> Get()
         {
-            return _context.Eventos;
+            try
+            {
+                var eventos = await _eventoService.GetAllEventosAsync(true);
+                if (eventos is null) return NotFound("Nenhum evento não encontrado.");
+
+                return Ok(eventos);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
         }
 
         [HttpGet("{id}")]
-        public IEnumerable<Evento> GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            return _context.Eventos.Where(_eventos => _eventos.Id == id);
+            try
+            {
+                var evento = await _eventoService.GetEventoByIdAsync(id, true);
+                if (evento is null) return NotFound("Nenhum evento por id não encontrado.");
+
+                return Ok(evento);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        [HttpGet("{tema}/tema")]
+        public async Task<IActionResult> GetByTema(string tema)
+        {
+            try
+            {
+                var evento = await _eventoService.GetAllEventosByTemaAsync(tema, true);
+                if (evento is null) return NotFound("Nenhum evento por tema não encontrado.");
+
+                return Ok(evento);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         [HttpPost]
-        public Evento Post(Evento evento)
+        public async Task<ActionResult> Post(Evento model)
         {
-            return evento;
+            try
+            {
+                var evento = await _eventoService.AddEventos(model);
+                if (evento is null) return BadRequest("Erro ao tentar adicionar um Evento");
+
+                return Ok(evento);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         [HttpPut("{id}")]
-        public string Put(int id)
+        public async Task <IActionResult> Put(int id, Evento model)
         {
-            return $"Exemplo de Put com id = {id}";
+            try
+            {
+                var evento = await _eventoService.UpdateEvento(id, model);
+                if (evento is null) return BadRequest("Erro ao tentar alterar um Evento por id");
+
+                return Ok(evento);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                return await _eventoService.DeleteEvento(id) ?
+                    Ok("Deletado") : 
+                    BadRequest("Evento não deletado");
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }
